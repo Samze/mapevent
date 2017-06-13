@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+set -eu
+
+go build -o map-event main.go && (cf uninstall-plugin map-event || true) && cf install-plugin map-event <<< yes
