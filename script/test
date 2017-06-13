@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-set -eu
-
-pushd acceptance > /dev/null
-  . .envrc
-  ginkgo -randomizeAllSpecs
-popd
