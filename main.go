@@ -15,8 +15,8 @@ type mapevent struct{}
 const eventUrl = "http://hottopic.apps.bogata.cf-app.com/map"
 
 type mapEventPost struct {
-	app   string
-	topic string
+	App   string `json:"app"`
+	Topic string `json:"topic"`
 }
 
 func (m *mapevent) Run(cliConnection plugin.CliConnection, args []string) {
@@ -32,8 +32,7 @@ func (m *mapevent) Run(cliConnection plugin.CliConnection, args []string) {
 	appName := args[1]
 	topicName := args[2]
 
-	postBody := mapEventPost{app: appName, topic: topicName}
-	fmt.Printf("%+v", postBody)
+	postBody := mapEventPost{App: appName, Topic: topicName}
 
 	b := new(bytes.Buffer)
 	err := json.NewEncoder(b).Encode(postBody)
@@ -42,13 +41,13 @@ func (m *mapevent) Run(cliConnection plugin.CliConnection, args []string) {
 		os.Exit(1)
 	}
 
+	fmt.Println(b)
+
 	res, err := http.Post(eventUrl, "application/json", b)
 	if err != nil {
 		fmt.Printf("error: %v", err)
 		os.Exit(1)
 	}
-
-	fmt.Println(res)
 
 	if res.StatusCode == http.StatusCreated {
 		fmt.Printf("Successfully mapped event topic %s to app %s\n", topicName, appName)
