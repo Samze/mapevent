@@ -41,8 +41,6 @@ func (m *mapevent) Run(cliConnection plugin.CliConnection, args []string) {
 		os.Exit(1)
 	}
 
-	fmt.Println(b)
-
 	res, err := http.Post(eventUrl, "application/json", b)
 	if err != nil {
 		fmt.Printf("error: %v", err)
