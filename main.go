@@ -12,7 +12,7 @@ import (
 
 type mapevent struct{}
 
-const eventUrl = "https://hottopic.apps.bogata.cf-app.com/map"
+const eventUrl = "http://hottopic.apps.bogata.cf-app.com/map"
 
 type mapEventPost struct {
 	app   string
